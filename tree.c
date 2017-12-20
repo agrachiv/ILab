@@ -189,7 +189,7 @@ class node {
 
 };
 char* vvod () {
-    FILE* RouteToFile = fopen ("C:/Users/88005553535/Desktop/data.txt", "rb");
+    FILE* RouteToFile = fopen ("data.txt", "rb");
 
     if (RouteToFile == NULL) {
         printf ("wrong route");
@@ -232,7 +232,7 @@ int main() {
 
     tree.ask();
 
-    FILE* RouteToFile = fopen ("C:/Users/88005553535/Desktop/data.txt", "w");
+    FILE* RouteToFile = fopen ("data.txt", "w");
 
 
     tree.destruct (RouteToFile);
