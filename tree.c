@@ -4,240 +4,197 @@
 #include <string.h>
 #include <assert.h>
 
-class node
-    {
+class node {
     private:
         char* def;
         node* left;
         node* right;
     public:
-        node (char* in)
-            {
+        node (char* in) {
             def = in;
             left = NULL;
             right = NULL;
-            }
+        }
 
 
-        void print()
-            {
-            if (left != NULL)
-                {
+        void print() {
+            if (left != NULL) {
                 left->print();
-                }
+            }
 
             printf ("%s\n", def);
 
-            if (right != NULL)
-                {
+            if (right != NULL) {
                 right->print();
-                }
             }
+        }
 
-        void addl (char* newdef)
-            {
+        void addl (char* newdef) {
             assert (left == NULL);
             left = new node (newdef);
-            }
-        void addle ()
-            {
+        }
+        void addle () {
             assert (left == NULL);
             left = new node ("NULL");
-            }
-        void addr (char* newdef)
-            {
+        }
+        void addr (char* newdef) {
             assert (right == NULL);
             right = new node (newdef);
-            }
-        void addre ()
-            {
+        }
+        void addre () {
             assert (right == NULL);
             right = new node ("NULL");
-            }
+        }
 
 
-        void removel()
-            {
+        void removel() {
             assert (left != NULL);
 
-            if (left->left != NULL)
-                {
+            if (left->left != NULL) {
                 left->removel();
-                }
+            }
 
-            if (left->right != NULL)
-                {
+            if (left->right != NULL) {
                 left->remover();
-                }
+            }
 
             left = NULL;
             delete left;
-            }
-        void remover()
-            {
+        }
+        void remover() {
             assert (right != NULL);
 
-            if (right->left != NULL)
-                {
+            if (right->left != NULL) {
                 right->removel();
-                }
+            }
 
-            if (right->right != NULL)
-                {
+            if (right->right != NULL) {
                 right->remover();
-                }
+            }
 
             right = NULL;
             delete right;
-            }
-        int ifleaf ()
-            {
-            if (left == NULL && right == NULL)
-                {
+        }
+        int ifleaf () {
+            if (left == NULL && right == NULL) {
                 return 1;
-                }
-            else
-                {
+            } else {
                 return 0;
-                }
             }
-        void check()
-            {
+        }
+        void check() {
             char ans;
-            printf ("Я правильно угадал y/n?\n");
+            printf ("Ya pravilno ugadal y/n?\n");
             scanf ("%s", &ans);
 
-            if (ans == 'n')
-                {
+            if (ans == 'n') {
                 char* newd = (char*) calloc (32, sizeof (char));
                 addl (def);
                 char* nquestion = (char*) calloc (64, sizeof (char));
-                printf ("Введите имя загаданного персонажа\n");
+                printf ("Vvedite imya zagadonnogo personazha\n");
                 scanf ("%s", newd);
-                printf ("Чем ваш персонаж отличается от персонажа: %s?\n", def);
+                printf ("Chem zagadannuy vami personaj otlichaetsa ot personaja: %s?\n", def);
                 scanf ("%s", nquestion);
                 def = nquestion;
                 addr (newd);
-                printf ("В следующий раз я не промахнусь!\n");
-                }
-
+                printf ("V sleduyushiy raz ya ne promahnus!\n");
             }
 
-        void ask()
-            {
+        }
+
+        void ask() {
             char ans;
 
-            if (ifleaf() == 1)
-                {
-                printf ("Ваш персонаж: ");
+            if (ifleaf() == 1) {
+                printf ("Vash personaj: ");
                 print();
                 check();
-                }
-            else
-                {
-                printf ("Ваш персонаж %s y/n?\n", def);
+            } else {
+                printf ("Vash personaj %s y/n?\n", def);
                 scanf ("%s", &ans);
 
-                if (ans == 'n')
-                    {
+                if (ans == 'n') {
                     left->ask();
-                    }
-                else if (ans == 'y')
-                    {
+                } else if (ans == 'y') {
                     right->ask();
-                    }
-                else
-                    {
+                } else {
                     ask();
-                    }
-
                 }
-            }
 
-        void destruct (FILE* RouteToFile)
-            {
+            }
+        }
+
+        void destruct (FILE* RouteToFile) {
 
             fprintf (RouteToFile, "(%s ", def);
 
 
-            if (left != NULL)
-                {
+            if (left != NULL) {
 
                 left->destruct (RouteToFile);
                 right->destruct (RouteToFile);
 
 
-                }
+            }
 
             fprintf (RouteToFile, ")");
 
 
-            }
-        void construct (char* buf, int first)
-            {
+        }
+        void construct (char* buf, int first) {
             int k = 1;
 
-            if (buf[0] == '(')
-                {
+            if (buf[0] == '(') {
 
-                if (first == 0)
-                    {
+                if (first == 0) {
                     def = &buf[1];
-                    }
+                }
 
                 char* buf1 = &buf[2 + strlen (&buf[1])];
 
                 int i = 1;
 
-                for (i = 1; k != 0; i++)
-                    {
-                    if (buf1[i] == '(')
-                        {
+                for (i = 1; k != 0; i++) {
+                    if (buf1[i] == '(') {
                         k++;
-                        }
-
-                    if (buf1[i] == ')')
-                        {
-                        k--;
-                        }
-
                     }
+
+                    if (buf1[i] == ')') {
+                        k--;
+                    }
+
+                }
 
                 char* buf2 = &buf1[i];
 
-                if (buf1[0] == '(')
-                    {
+                if (buf1[0] == '(') {
 
-                    if (buf1[0] == '(')
-                        {
+                    if (buf1[0] == '(') {
                         addl ("NULL");
-                        }
+                    }
 
-                    if (buf2[0] == '(')
-                        {
+                    if (buf2[0] == '(') {
                         addr ("NULL");
-                        }
+                    }
 
 
 
                     left->construct (buf1, 0);
                     right->construct (buf2, 0);
-                    }
-
-
                 }
-            }
 
-    };
-char* vvod ()
-    {
+
+            }
+        }
+
+};
+char* vvod () {
     FILE* RouteToFile = fopen ("C:/Users/88005553535/Desktop/data.txt", "rb");
 
-    if (RouteToFile == NULL)
-        {
+    if (RouteToFile == NULL) {
         printf ("wrong route");
         exit (1);
-        }
+    }
 
     fseek (RouteToFile, 0, SEEK_END);
     long FileSize = ftell (RouteToFile);
@@ -246,33 +203,29 @@ char* vvod ()
 
     char* buffer = (char*) malloc (sizeof (char) * (FileSize));
 
-    if (buffer == NULL)
-        {
+    if (buffer == NULL) {
         exit (2);
-        }
+    }
 
     fread (buffer, 1, (FileSize), RouteToFile);
 
-    for (int i = 1; i < FileSize; i++)
-        {
+    for (int i = 1; i < FileSize; i++) {
 
-        if (buffer[i] == ' ')
-            {
+        if (buffer[i] == ' ') {
             buffer[i] = '\0';
 
-            }
         }
+    }
 
 
     fclose (RouteToFile);
     return buffer;
-    }
+}
 
 
-int main()
-    {
+int main() {
     setlocale (LC_ALL, "Rus");
-    node tree ("вымышленный");
+    node tree ("vymyshlenny");
 
 
     tree.construct (vvod(), 1);
@@ -287,4 +240,4 @@ int main()
 
     fclose (RouteToFile);
     return 0;
-    }
+}
