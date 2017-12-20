@@ -4,7 +4,7 @@
 #include <string.h>
 #include <assert.h>
 
-#define spec "%d\n" // тут нормальный принт сложно реализовать, так как тип передается в виде спецификаторов
+#define spec "%d\n" // tut slozhno realizovat normalny print iz-za specificatorov
 template <typename type>
 class Stack {
 
