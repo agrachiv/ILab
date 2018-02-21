@@ -36,7 +36,7 @@ class node {
                 left->print();
             }
 
-            printf ("\n%s\n", addSpace(def));
+            printf ("\n%s\n", addSpace (def));
 
             if (right != NULL) {
                 right->print();
@@ -124,7 +124,7 @@ class node {
                 print();
                 check();
             } else {
-                printf ("\nVash personaj %s y/n?\n", addSpace(def));
+                printf ("\nVash personaj %s y/n?\n", addSpace (def));
                 scanf ("%s", &ans);
 
                 if (ans == 'n') {
