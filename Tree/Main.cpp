@@ -1,14 +1,16 @@
-#include "Node.cpp"
+#include "Diff.cpp"
 
 int main() {
-    node tree("^");
-    tree.addl("+");
-    tree.left->addr("0");
-    tree.left->addl("6");
-    tree.addr("exp");
-    tree.right->addl("1");
-    tree.calculate();
-    tree.print();
-
+    char tmp[32];
+    char variable;
+    int trigger = 0;
+    printf("Enter equation, diff variable and 1 or 0 for CMD outpoot\n");
+    scanf("%s\n", tmp);
+    scanf("%c\n", &variable);
+    scanf("%d", &trigger);
+    differentiate(tmp, variable, trigger);
     return 0;
 }
+
+
+

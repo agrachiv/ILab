@@ -4,23 +4,6 @@
 #include <string.h>
 #include <assert.h>
 
-char* addSpace (char* String) {
-    int i = 0;
-    char* rString = (char*) calloc (strlen (String), sizeof (char));
-
-    for (i; String[i] != '\0' ; i++) {
-        if (String[i] == '_') {
-            rString[i] = ' ';
-        } else {
-            rString[i] = String[i];
-        }
-    }
-
-    rString[i] = '\0';
-
-    return rString;
-}
-
 class node {
     private:
         char* def;
@@ -37,7 +20,7 @@ class node {
                 left->print();
             }
 
-            printf ("\n%s\n", addSpace (def));
+            printf ("\n%s\n", addSpace(def));
 
             if (right != NULL) {
                 right->print();
@@ -125,7 +108,7 @@ class node {
                 print();
                 check();
             } else {
-                printf ("\nVash personaj %s y/n?\n", addSpace (def));
+                printf ("\nVash personaj %s y/n?\n", def);
                 scanf ("%s", &ans);
 
                 if (ans == 'n') {
@@ -143,7 +126,7 @@ class node {
             fprintf (RouteToFile, "(%s ", def);
 
 
-            if ((left != NULL) && (right != NULL)) {
+            if (left != NULL) {
 
                 left->destruct (RouteToFile);
                 right->destruct (RouteToFile);
@@ -238,7 +221,21 @@ char* vvod () {
     return buffer;
 }
 
+char* addSpace (char* String) {
+int i = 0;
+char * rString = (char*) calloc(strlen(String),sizeof(char));
 
+    for ( i; String[i] != '\0' ; i++) {
+        if (String[i] == '_') {
+            rString[i] = ' ';
+        } else {
+        rString[i] = String[i];
+        }
+       }
+       rString[i] = '\0';
+
+    return rString;
+}
 
 int main() {
     setlocale (LC_ALL, "Rus");

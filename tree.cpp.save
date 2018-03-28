@@ -118,6 +118,7 @@ class node {
 
         }
         void ask() {
+        
             char ans;
 
             if (ifleaf() == 1) {
@@ -143,7 +144,7 @@ class node {
             fprintf (RouteToFile, "(%s ", def);
 
 
-            if ((left != NULL) && (right != NULL)) {
+            if (left != NULL) && (right != NULL)) {
 
                 left->destruct (RouteToFile);
                 right->destruct (RouteToFile);
@@ -242,6 +243,7 @@ char* vvod () {
 
 int main() {
     setlocale (LC_ALL, "Rus");
+    
     node tree ("vymyshlenny");
 
 
